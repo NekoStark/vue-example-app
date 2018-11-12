@@ -1,18 +1,41 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="has-background-white-ter">
+    <Navbar />
+    <div class="home">
+      <div class="container">
+        <div class="columns">
+          <div class="column is-one-third">
+            <ProfileCard />
+          </div>
+          <div class="column">
+            <AddNewPost />
+            <Timeline />
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue';
+import Navbar from '@/components/Navbar.vue';
+import ProfileCard from '@/components/ProfileCard.vue';
+import AddNewPost from '@/components/AddNewPost.vue';
+import Timeline from '@/components/Timeline.vue';
 
 export default {
   name: 'home',
   components: {
-    HelloWorld,
+    Navbar,
+    ProfileCard,
+    AddNewPost,
+    Timeline,
   },
 };
 </script>
+
+<style scoped>
+.home {
+  padding-top: 2rem;
+}
+</style>
