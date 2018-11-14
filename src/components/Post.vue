@@ -1,7 +1,7 @@
 <template>
   <article class="media">
     <div class="media-left">
-      <figure class="image is-64x64">
+      <figure class="image is-64x64" v-if="loading === false">
         <img class="is-rounded" v-bind:src="`https://api.adorable.io/avatars/64/${author.email}`" alt="Image">
       </figure>
     </div>
@@ -35,6 +35,7 @@ export default {
   async mounted() {
     const author = await axios.get(`https://jsonplaceholder.typicode.com/users/${this.authorId}`);
     this.author = author.data;
+    this.loading = false;
   },
 };
 </script>
