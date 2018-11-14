@@ -1,14 +1,15 @@
 <template>
   <div>
+    <AddNewPost :handleAddNew="onNewPost" />
     <div class="box">
       <div v-for="(post, index) in posts" :key="post.id">
-        <Post v-bind:authorId="post.userId" v-bind:content="post.body" />
+        <Post :authorId="post.userId" :content="post.body" />
         <hr v-if="index < posts.length - 1"/>
       </div>
     </div>
     <a
       class="button is-rounded is-fullwidth"
-      v-bind:class="{ 'is-loading': loading }"
+      :class="{ 'is-loading': loading }"
       v-if="next"
       @click="loadMore"
     >
@@ -21,11 +22,14 @@
 import axios from 'axios';
 import parse from 'parse-link-header';
 import Post from '@/components/Post.vue';
+import AddNewPost from '@/components/AddNewPost.vue';
 
+// FIXME update post fatto per bene
 export default {
   name: 'timeline',
   components: {
     Post,
+    AddNewPost,
   },
   data() {
     return {
@@ -49,6 +53,9 @@ export default {
       this.next = linkHeader ? linkHeader.next : null;
 
       this.loading = false;
+    },
+    onNewPost(post) {
+      this.posts = [post, ...this.posts];
     },
   },
   async mounted() {
